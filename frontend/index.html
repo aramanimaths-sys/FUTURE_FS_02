@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LeadFlow - Client Lead CRM</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">⚡</div>
+
+            <div>
+                <h2>LeadFlow</h2>
+                <span>Mini CRM</span>
+            </div>
+        </div>
+
+
+        <nav>
+
+            <a class="active">
+                <span>📊</span>
+                Dashboard
+            </a>
+
+            <a>
+                <span>👥</span>
+                Leads
+            </a>
+
+            <a>
+                <span>📈</span>
+                Analytics
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="admin-card">
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+                <div>
+                    <strong>Admin</strong>
+                    <small>CRM Manager</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <p class="welcome">
+                    Welcome back 👋
+                </p>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p class="subtitle">
+                    Manage and track your client leads
+                </p>
+
+            </div>
+
+
+            <button
+                class="add-btn"
+                onclick="openForm()"
+            >
+
+                <span>＋</span>
+
+                Add New Lead
+
+            </button>
+
+        </header>
+
+
+
+        <!-- STATISTICS -->
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div>
+
+                    <span>Total Leads</span>
+
+                    <h2 id="totalLeads">
+                        0
+                    </h2>
+
+                    <small>
+                        All leads
+                    </small>
+
+                </div>
+
+                <div class="stat-icon purple">
+                    👥
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div>
+
+                    <span>New Leads</span>
+
+                    <h2 id="newLeads">
+                        0
+                    </h2>
+
+                    <small>
+                        Need attention
+                    </small>
+
+                </div>
+
+                <div class="stat-icon blue">
+                    ✨
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div>
+
+                    <span>Contacted</span>
+
+                    <h2 id="contactedLeads">
+                        0
+                    </h2>
+
+                    <small>
+                        In progress
+                    </small>
+
+                </div>
+
+                <div class="stat-icon orange">
+                    📞
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div>
+
+                    <span>Converted</span>
+
+                    <h2 id="convertedLeads">
+                        0
+                    </h2>
+
+                    <small>
+                        Successful leads
+                    </small>
+
+                </div>
+
+                <div class="stat-icon green">
+                    🎯
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- LEADS -->
+
+        <section class="leads-section">
+
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>
+                        Recent Leads
+                    </h2>
+
+                    <p>
+                        View and manage your clients
+                    </p>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search leads..."
+                        onkeyup="searchLeads()"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+
+                            <th>Email</th>
+
+                            <th>Source</th>
+
+                            <th>Status</th>
+
+                            <th>Notes</th>
+
+                            <th>Follow-up</th>
+
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="leadTable">
+
+                        <tr>
+
+                            <td
+                                colspan="7"
+                                class="loading"
+                            >
+                                Loading leads...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+
+    </main>
+
+</div>
+
+
+
+<!-- ADD / EDIT LEAD MODAL -->
+
+<div
+    class="modal"
+    id="leadModal"
+>
+
+
+    <div class="modal-content">
+
+
+        <div class="modal-header">
+
+            <div>
+
+                <span class="modal-label">
+                    CLIENT MANAGEMENT
+                </span>
+
+                <h2 id="leadModalTitle">
+                    Add New Lead
+                </h2>
+
+            </div>
+
+
+            <button
+                class="close-btn"
+                onclick="closeForm()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+
+        <form id="leadForm">
+
+
+            <div class="form-group">
+
+                <label>
+                    Full Name *
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter full name"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Email Address *
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter email address"
+                    required
+                >
+
+            </div>
+
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="phone"
+                        placeholder="Enter phone"
+                    >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label>
+                        Company
+                    </label>
+
+                    <input
+                        type="text"
+                        id="company"
+                        placeholder="Company name"
+                    >
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Lead Source
+                </label>
+
+                <select id="source">
+
+                    <option value="">
+                        Select source
+                    </option>
+
+                    <option value="Website">
+                        Website
+                    </option>
+
+                    <option value="LinkedIn">
+                        LinkedIn
+                    </option>
+
+                    <option value="Referral">
+                        Referral
+                    </option>
+
+                    <option value="Instagram">
+                        Instagram
+                    </option>
+
+                    <option value="Facebook">
+                        Facebook
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    Notes / Follow-up Details
+                </label>
+
+                <textarea
+                    id="notes"
+                    placeholder="Add notes about this lead..."
+                ></textarea>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label>
+                    📅 Follow-up Date
+                </label>
+
+                <input
+                    type="date"
+                    id="followUpDate"
+                >
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="save-btn"
+                id="saveBtn"
+            >
+
+                Save Lead
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
