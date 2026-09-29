@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/leads";
+const API_URL = "https://future-fs-02-1-nq8f.onrender.com/api/leads";
 
 let allLeads = [];
 
