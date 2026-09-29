@@ -1,4 +1,8 @@
+<<<<<<< HEAD:script.js
 const API_URL = "https://future-fs-02-1-nq8f.onrender.com/api/leads";
+=======
+const API_URL = "http://2401:4900:c90e:fc4d:5e8f:df16:65e2:bf49/api/leads";
+>>>>>>> cc20141 (Complete LeadFlow CRM functionality):frontend/script.js
 
 let allLeads = [];
 
